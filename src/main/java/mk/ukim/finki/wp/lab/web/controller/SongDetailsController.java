@@ -23,6 +23,7 @@ public class SongDetailsController {
         model.addAttribute("artists", artistService.listArtists());
         model.addAttribute("selectedSong", songService.findByTrackId(TrackId));
 
-        return "songDetails";
+        model.addAttribute("bodyContent", "songDetails");
+        return "master-template";
     }
 }

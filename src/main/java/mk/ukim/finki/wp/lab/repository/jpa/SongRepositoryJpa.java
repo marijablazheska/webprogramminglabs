@@ -14,7 +14,5 @@ public interface SongRepositoryJpa extends JpaRepository<Song, Long> {
     Optional<Song> findByTrackId(String trackId);
     Song findById(Song song);
     void deleteByTrackId(String trackId);
-//    @Query(value = "select * from ")
     List<Song> findAllByAlbum_Id(Long albumId);
-//    Artist addArtistToSong(Artist artist, Song song);
 }

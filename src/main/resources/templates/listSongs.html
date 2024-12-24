@@ -1,65 +1,70 @@
-<html xmlns:th="http://www.w3.org/1999/html">
-<head>
-    <meta charset="utf-8">
-    <title>Songs Homepage - Welcome to My Music Store</title>
-    <style type="text/css">
-        body {
-            width: 800px;
-            margin: auto;
-        }
-    </style>
-</head>
-<body>
-<header>
-    <h1>Welcome to My Music Store</h1>
-</header>
-<main>
-    <h2>Choose a song:</h2>
+<th:block xmlns:th="http://www.thymeleaf.org/">
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Songs Homepage - Welcome to My Music Store</title>
+        <style type="text/css">
 
-    <form th:method="POST" th:action="@{/songs}">
-        <div th:each="song : ${songs}">
-            <input th:name="radioSong" type="radio" th:value="${song.trackId}">
-            <label th:for="radioSong"
-                   th:text="${song.title} + ${' '} + ${song.getGenre().getName()} + ${' '} + ${song.getGenre().getDescription()} + ${' '} + ${song.releaseYear} + ${' '} + ${song.album.getName()}" >
-            </label>
+        </style>
+    </head>
+    <body>
+    <!--<header>-->
+    <!--    <h1>Welcome to My Music Store</h1>-->
+    <!--</header>-->
+    <main>
+        <h2>Choose a song:</h2>
 
-            <a th:href="@{/songs/delete/{id} (id=${song.getId()})}">
-                <button type="button"><i class="fa fa-trash">Delete</i></button>
-            </a>
-
-            <a class="btn btn-sm btn-info" th:href="@{/songs/edit-form/{id} (id=${song.getId()})}">
-                <i class="fa fa-trash">Edit</i>
-            </a>
-            <br>
-        </div>
-        <input type='submit' value='Submit'>
-    </form>
-    <div class="col-sm-12 col-md-12">
-        <a href="/songs/add-form" class="btn btn-block btn-dark">Add new song</a>
-    </div>
-    <div class="col-sm-12 col-md-12">
-        <p th:text="(${error} != null ? ${error} : '')">
-    </div>
-    <!-- Search -->
-    <div class="container mb-5">
-        <div class="row">
-            <div class="col-md-5">
-                <form action="/songs" method="GET">
-                    <div class="form-group">
-                        <label for="search">Search</label>
-                        <input type="text"
-                               class="form-control"
-                               id="search"
-                               name="search"
-                               placeholder=" Enter AlbumId ">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </form>
+        <form th:method="POST" th:action="@{/songs}">
+            <div th:each="song : ${songs}">
+                <input th:name="radioSong" type="radio" th:value="${song.trackId}">
+                <label th:for="radioSong"
+                       th:text="${song.title} + ${' '} + ${song.getGenre().getName()} + ${' '} + ${song.getGenre().getDescription()} + ${' '} + ${song.releaseYear} + ${' '} + ${song.album.getName()}" >
+                </label>
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a th:href="@{/songs/delete/{id} (id=${song.getId()})}">
+                        <button type="button"><i class="fa fa-trash">Delete</i></button>
+                    </a>
+                </th:block>
+                <th:block sec:authorize="hasRole('ROLE_ADMIN') || hasRole('ROLE_MOD')">
+                    <a class="btn btn-sm btn-info" th:href="@{/songs/edit-form/{id} (id=${song.getId()})}">
+                        <i class="fa fa-trash">Edit</i>
+                    </a>
+                    <br>
+                </th:block>
             </div>
-
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                <input type='submit' value='Submit'>
+            </th:block>
+        </form>
+        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+            <div class="col-sm-12 col-md-12">
+                <a href="/songs/add-form" class="btn btn-block btn-dark">Add new song</a>
+            </div>
+        </th:block>
+        <div class="col-sm-12 col-md-12">
+            <p th:text="(${error} != null ? ${error} : '')">
         </div>
-    </div>
+        <!-- Search -->
+        <div class="container mb-5">
+            <div class="row">
+                <div class="col-md-5">
+                    <form action="/songs" method="GET">
+                        <div class="form-group">
+                            <label for="search">Search</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="search"
+                                   name="search"
+                                   placeholder=" Enter AlbumId ">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
 
-</main>
-</body>
-</html>
+            </div>
+        </div>
+
+    </main>
+    </body>
+    </html>
+</th:block>

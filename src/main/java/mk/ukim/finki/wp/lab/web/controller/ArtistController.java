@@ -26,7 +26,7 @@ public class ArtistController {
 
     @GetMapping("/Artist")
     public String getArtistPage(@RequestParam(required = false) String radioSong, @RequestParam(required = false) String search,
-                                 Model model) {
+                                Model model) {
         model.addAttribute("songId", radioSong);
         model.addAttribute("songs", songService.listSongs());
 
@@ -34,7 +34,10 @@ public class ArtistController {
             model.addAttribute("artists", artistService.filterBySearch(search));
         }
         else model.addAttribute("artists", artistService.listArtists());
-        return "artistsList";
+
+        model.addAttribute("bodyContent", "artistsList");
+
+        return "master-template";
     }
 
     @PostMapping("/Artist")

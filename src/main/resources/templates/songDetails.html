@@ -7,7 +7,7 @@
 <body>
 <!--&lt;!&ndash; dynamically display data &#45;&#45; >-->
 <header>
-   <h1 th:text="${selectedSong.title}"></h1>
+    <h1 th:text="${selectedSong.title}"></h1>
 </header>
 <section>
     <h2 th:text="${selectedSong.genre.getName()}">GenreName</h2>
@@ -17,10 +17,10 @@
     <ul th:each="performer : ${selectedSong.performers}">
         <li th:text="${performer.firstName} + ${' '} + ${performer.lastName}"></li>
     </ul>
-<!--    <ul>-->
-<!--        <li>Jon Bon Jovi</li>-->
-<!--        <li>Richie Sambora</li>-->
-<!--    </ul>-->
+    <!--    <ul>-->
+    <!--        <li>Jon Bon Jovi</li>-->
+    <!--        <li>Richie Sambora</li>-->
+    <!--    </ul>-->
     <div th:each="artist : ${artists}">
         <span th:name="radioArtist" th:value="${artist.id}"></span>
         <label th:for="radioArtist" th:text="${artist.firstName} + ${' '} + ${artist.lastName}" ></label>

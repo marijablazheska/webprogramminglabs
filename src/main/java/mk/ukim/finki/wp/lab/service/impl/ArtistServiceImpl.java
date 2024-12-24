@@ -38,7 +38,6 @@ public class ArtistServiceImpl implements ArtistService {
         if(artist.getSongs().contains(song)){
             artist.getSongs().remove(song);
         }
-//        artistRepositoryJpa.findAll().removeIf(art -> art.getSongs().contains(song));
         artist.getSongs().add(song);
         artistRepositoryJpa.save(artist);
         return song;
@@ -66,52 +65,5 @@ public class ArtistServiceImpl implements ArtistService {
         return artistRepositoryJpa.search(nameArtist);
     }
 
-//    private final ArtistRepository artistRepository;
-//
-//    public ArtistServiceImpl(ArtistRepository artistRepository) {
-//        this.artistRepository = artistRepository;
-//    }
-//
-//    @Override
-//    public List<Artist> listArtists() {
-//        if(artistRepository.findAll().isEmpty()) {
-//            return null;
-//        }
-//        return artistRepository.findAll();
-//    }
-//
-//    @Override
-//    public Artist ArtistfindById(Long id) {
-//        return artistRepository.findById(id).orElse(null);
-//    }
-//
-//    public Song addSongToArtist(Artist artist, Song song) {
-//        if(artist == null || song == null)
-//            return null;
-//
-//        artistRepository.addSongToArtist(artist, song);
-//        return song;
-//    }
-//
-//    @Override
-//    public Artist Save(Long id, String firstName, String lastName, String bio) {
-//        if(id == null){
-//            return null;
-//        }
-//        Artist artist = new Artist(id, firstName, lastName, bio);
-//        artistRepository.Save(artist);
-//        return artist;
-//    }
-//
-//    @Override
-//    public void delete(Long id) {
-//        if(id == null)
-//            return;
-//        artistRepository.delete(id);
-//    }
-//
-//    @Override
-//    public List<Artist> filterBySearch(String nameArtist) {
-//        return artistRepository.filterBySearch(nameArtist);
-//    }
+
 }

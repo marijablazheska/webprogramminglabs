@@ -6,11 +6,6 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-//Long id,
-//String firstName,
-//String lastName и
-//String bio
 @Data
 @Entity
 public class Artist {
@@ -25,7 +20,6 @@ public class Artist {
 
 
     public Artist(String firstName, String lastName, String bio) {
-//        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.bio = bio;
@@ -38,7 +32,7 @@ public class Artist {
         this.bio = bio;
     }
 
-    public Artist() {
+    public Artist(){
 
     }
 }
